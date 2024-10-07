@@ -1,14 +1,23 @@
 import os
+import tensorflow as tf
 from flask import Flask, request, jsonify
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
 from prediction import predict
+from config import BASE_LEARNERS, META_CLASSIFIER
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS on all routes
 
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 app.config['ALLOWED_EXTENSIONS'] = {'mp4', 'avi', 'mov'}
+
+inception_optical = tf.keras.models.load_model(BASE_LEARNERS[0])
+dense_optical = tf.keras.models.load_model(BASE_LEARNERS[1])
+xception_lbp = tf.keras.models.load_model(BASE_LEARNERS[2])
+dense_lbp = tf.keras.models.load_model(BASE_LEARNERS[3])
+
+meta_classifier = tf.keras.models.load_model(META_CLASSIFIER)
 
 
 def allowed_file(filename):
@@ -27,7 +36,6 @@ def before_request():
 
 @app.route('/upload', methods=['POST'])
 def upload_video():
-
     if 'file' not in request.files:
         return jsonify({"error": "No file part"}), 400
 
@@ -42,7 +50,7 @@ def upload_video():
         file.save(filepath)
 
         # Make prediction
-        prediction = predict(filepath)
+        prediction = predict(filepath, inception_optical, dense_optical, xception_lbp, dense_lbp, meta_classifier)
         print('prediction made')
 
         return jsonify({"prediction": prediction}), 200
