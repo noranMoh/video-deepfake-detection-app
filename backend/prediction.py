@@ -1,3 +1,4 @@
+import os
 import cv2
 import numpy as np
 import tensorflow as tf
@@ -98,6 +99,9 @@ def predict(filepath, inception_optical, dense_optical, xception_lbp, dense_lbp,
     video_prediction = video_prediction.reshape(1, -1)
 
     final_prediction = meta_classifier.predict(video_prediction, verbose=0)
+
+    # Delete video file
+    os.remove(filepath)
 
     if final_prediction > 0.5:
         return True
