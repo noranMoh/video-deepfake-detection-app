@@ -21,16 +21,12 @@ By combining these approaches, the system provides a more reliable method for id
    cd deepfake-detection-app/backend
 ```
 2. Install requirements
-
 ```
 pip install -r requirements.txt
-
 ```
 3. Run the backend
-
 ```
 Python app.py
-
 ```
 
 ### Frontend Setup
