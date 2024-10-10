@@ -46,6 +46,8 @@ def upload_video():
 
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
+        if not os.path.exists(UPLOAD_FOLDER):
+            os.makedirs(UPLOAD_FOLDER)
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
 

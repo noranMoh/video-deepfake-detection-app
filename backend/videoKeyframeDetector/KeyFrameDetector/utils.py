@@ -1,6 +1,5 @@
 import os
 import cv2
-import matplotlib.pyplot as plt
 from PIL import Image
 
 
@@ -53,11 +52,3 @@ def prepare_dirs(keyframePath, imageGridsPath, csvPath):
     if not os.path.exists(csvPath):
         os.makedirs(csvPath)
 
-
-def plot_metrics(indices, lstfrm, lstdiffMag):
-    plt.plot(indices, y[indices], "x")
-    l = plt.plot(lstfrm, lstdiffMag, 'r-')
-    plt.xlabel('frames')
-    plt.ylabel('pixel difference')
-    plt.title("Pixel value differences from frame to frame and the peak values")
-    plt.show()

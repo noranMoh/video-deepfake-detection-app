@@ -2,11 +2,7 @@ import os
 import cv2
 from dataPreprocessing.env import PREPRO_DIR
 import numpy as np
-import matplotlib.pyplot as plt
-import spynet
-import torch
 from pathlib import Path
-from tqdm import tqdm
 
 dataSetCount = 1000
 def calculateOpticalFlow(frame1, frame2):
@@ -42,56 +38,7 @@ def save_cv_flow(path,type):
     Path(PREPRO_DIR + '/' + type).mkdir(parents=True, exist_ok=True)
 
     path_to_save = str(path).rsplit('/',2)
-    #plt.savefig(PREPRO_DIR + '/' + type + '/' + path_to_save[-2] + '_' + path_to_save[-1] + '.png')
     path_to_save = PREPRO_DIR + '/' + type + '/' + path_to_save[-2] + '_' + path_to_save[-1]
 
     cv2.imwrite(f"{path_to_save}.png", rgb_flow)
 
-def save_spynet_flow(path):
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
-    model = spynet.SpyNet.from_pretrained('flying-chair')
-    model.to(device)
-    model.eval()
-
-   # flow = predict([taxi1], [taxi2])[0]
-
-"""def save_spynet_flow(path):
-    
-    if not os.path.exists(os.path.join(path, '1.png')):
-        return
-
-    first_img = cv2.cvtColor(cv2.imread(os.path.join(path, '1.png')), cv2.COLOR_BGR2RGB)
-    second_img = cv2.cvtColor(cv2.imread(os.path.join(path, '2.png')), cv2.COLOR_BGR2RGB)
-
-    model = spynet.SpyNet.from_pretrained('sentinel')
-    #model.eval()
-
-    #flow = model((first_img, second_img))[0]
-    #flow = spynet.flow.flow_to_image(flow)
-    #Image.fromarray(flow).show()
-"""
-
-def main ():
-
-    rootdir = os.path.expanduser("~/masterThesis/deepfakeDetection/dataPreprocessing/frames")
-    img_type = 'Real'
-    count_fake = 0
-    count_real = 0
-
-    for subdir, dirs, files in tqdm(os.walk(rootdir)):
-        if 'Fake' in str(subdir):
-            img_type = 'Fake'
-            count_fake = count_fake + 1
-            if count_fake > dataSetCount:
-                continue
-        else:
-            img_type = 'Real'
-            count_real = count_real + 1
-            if count_real > dataSetCount:
-                continue
-        save_cv_flow(os.path.join(subdir),img_type)
-        #save_spynet_flow(os.path.join(subdir))
-
-if __name__ == "__main__":
-    main()
