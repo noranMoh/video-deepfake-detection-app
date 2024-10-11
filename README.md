@@ -28,7 +28,7 @@ pip install -r requirements.txt
 ```
 3. Run the backend
 ```
-Python app.py
+python app.py
 ```
 
 ### Frontend Setup
