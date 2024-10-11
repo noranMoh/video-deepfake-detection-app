@@ -20,7 +20,7 @@ By combining these approaches, the system provides a more reliable method for id
    git clone https://github.com/noranMoh/video-deepfake-detection-app.git
 ```
 ```
-   cd deepfake-detection-app/backend
+   cd video-deepfake-detection-app/backend
 ```
 2. Install requirements
 ```
