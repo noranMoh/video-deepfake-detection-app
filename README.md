@@ -17,7 +17,7 @@ By combining these approaches, the system provides a more reliable method for id
 1. Clone the repository and open backend folder
 
 ```
-   git clone https://github.com/yourusername/deepfake-detection-app.git](https://github.com/noranMoh/video-deepfake-detection-app.git
+   git clone [https://github.com/yourusername/deepfake-detection-app.git](https://github.com/noranMoh/video-deepfake-detection-app.git](https://github.com/noranMoh/video-deepfake-detection-app.git)
 ```
 ```
    cd deepfake-detection-app/backend
