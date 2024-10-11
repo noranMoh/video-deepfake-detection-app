@@ -13,7 +13,7 @@ By combining these approaches, the system provides a more reliable method for id
 ## Installation
 
 ### Install git lfs
--   The models' size is bigger than the allowed file size in git, to porperly be able to fetch them, please install git lfs as describef here:[git lfs](https://git-lfs.com/)
+-   The models' size is bigger than the allowed file size in git, to porperly be able to fetch them, please install git lfs as described here: [git lfs](https://git-lfs.com/)
 -   Alternatively, you can download the models folder from [models](https://drive.google.com/drive/folders/14qk4c3YwAwwRrKgrwAhtwLxvVPIqZHjA?usp=drive_link) and replace the models folder in the backend with the downloaded folder
 
 ### Backend Setup
